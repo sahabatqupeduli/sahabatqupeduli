@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahabatQu Peduli - Bersama Menebarkan Kebaikan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Header.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .donation-button {
+            transition: all 0.3s ease;
+        }
+        
+        .donation-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-transition {
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #3B82F6;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3B82F6;
+            z-index: 1;
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .donation-option {
+            transition: all 0.3s ease;
+        }
+        
+        .donation-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .donation-option.active {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
+        .payment-method {
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-method.active {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
+        .bank-info {
+            transition: all 0.3s ease;
+        }
+        
+        .bank-info:hover {
+            transform: scale(1.02);
+        }
+        
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .show-content {
+            max-height: 1000px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #E5E7EB;
+            overflow: hidden;
+        }
+        
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #2563EB;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: #2563EB;
+            color: white;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hands-helping text-3xl text-blue-600 mr-2"></i>
+                <span class="text-2xl font-bold text-gray-800">SahabatQu Peduli</span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#beranda" class="text-gray-700 hover:text-blue-600 transition">Beranda</a>
+                <a href="#tentang" class="text-gray-700 hover:text-blue-600 transition">Tentang Kami</a>
+                <a href="#program" class="text-gray-700 hover:text-blue-600 transition">Program</a>
+                <a href="#berita" class="text-gray-700 hover:text-blue-600 transition">Berita</a>
+            </nav>
+            
+            <button id="donate-btn" class="donation-button bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700">
+                Donasi Sekarang
+            </button>
+            
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white w-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#beranda" class="text-gray-700 hover:text-blue-600 py-2">Beranda</a>
+                <a href="#tentang" class="text-gray-700 hover:text-blue-600 py-2">Tentang Kami</a>
+                <a href="#program" class="text-gray-700 hover:text-blue-600 py-2">Program</a>
+                <a href="#berita" class="text-gray-700 hover:text-blue-600 py-2">Berita</a>
+                <button id="mobile-donate-btn" class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 text-center">
+                    Donasi Sekarang
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Beranda -->
+    <section id="beranda" class="hero-section min-h-screen flex items-center justify-center text-white pt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Bersama Menebarkan Kebaikan</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Kami berkomitmen untuk membantu masyarakat yang membutuhkan melalui berbagai program kemanusiaan</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button id="donate-btn-beranda" class="donation-button bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700">
+                    <i class="fas fa-hand-holding-heart mr-2"></i>Donasi Sekarang
+                </button>
+                <a href="#program" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition">
+                    Lihat Program
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">5,000+</h3>
+                    <p class="text-gray-600">Penerima Manfaat</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <i class="fas fa-map-marker-alt text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">50+</h3>
+                    <p class="text-gray-600">Lokasi</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <i class="fas fa-hand-holding-heart text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Rp10M+</h3>
+                    <p class="text-gray-600">Dana Terkumpul</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <i class="fas fa-project-diagram text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">100+</h3>
+                    <p class="text-gray-600">Program Sukses</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Program Terbaru -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Program Utama</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Beberapa program utama yang kami lakukan untuk membantu masyarakat
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Program 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <img src="Beasiswa sahabatqu Peduli.jpg" alt="Pendidikan" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Beasiswa SahabatQu Peduli</h3>
+                        <p class="text-gray-600 mb-4">
+                            Program Beasiswa Sahabatqu Peduli adalah bentuk nyata kepedulian kami terhadap masa depan para santri..
+                        </p>
+                        <a href="#program" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Program 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <img src="rumah tahfidz gk.jpg" alt="Kesehatan" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Rumah Tahfidz Binaan Gunung Kidul</h3>
+                        <p class="text-gray-600 mb-4">
+                            Program ini merupakan bentuk kepedulian Sahabatqu Peduli dalam mendukung dakwah Al-Qur'an di wilayah pedesaan, khususnya di Gunung Kidul.
+                        </p>
+                        <a href="#program" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Program 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <img src="Penyaluran Cianjur 8.jpeg" alt="Bantuan Bencana" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bantuan Bencana</h3>
+                        <p class="text-gray-600 mb-4">
+                            Tanggap darurat dan rehabilitasi pasca bencana alam di seluruh Indonesia.
+                        </p>
+                        <a href="#program" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#program" class="donation-button bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700">
+                    Lihat Semua Program
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Berita Terbaru -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Kabar SahabatQu Peduli</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Update tentang kegiatan dan program SahabatQu Peduli
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Berita 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <img src="rumah tahfidz gk.jpg" alt="Berita 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">30 Januari 2021</span>
+                        <h3 class="text-xl font-bold text-gray-800 mt-2 mb-3">Bersama PPPA Daarul Qur'an, Pesantren SahabatQu Mulai Mengembangkan Manfaat Zakat</h3>
+                        <p class="text-gray-600 mb-4">
+                            Pesantren SahabatQu dikukuhkan sebagai MPZ dengan visi sinergi dalam pengembangan kemanfaatan zakat, infak, sedekah di ekosistem pesantren.
+                        </p>
+                        <a href="#berita" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Berita 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <img src="donasi palestina.jpeg" alt="Berita 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">18 Desember 2023</span>
+                        <h3 class="text-xl font-bold text-gray-800 mt-2 mb-3">Penyaluran Donasi Palestina</h3>
+                        <p class="text-gray-600 mb-4">
+                            MPZ SahabatQu Bantu Palestina Melalui Baznas Kota Yogyakarta
+                        </p>
+                        <a href="#berita" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+              
+            
+            <div class="text-center mt-12">
+                <a href="#berita" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center justify-center">
+                    Lihat Semua Berita <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tentang Kami -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Tentang Kami</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="1.png" alt="Tentang Kami" class="rounded-lg shadow-lg">
+                </div>
+                <div>
+                    
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        SahabatQu Peduli adalah Mitra Pengelola Zakat (MPZ) dari Pondok Pesantren SahabatQu, yang merupakan bagian dari jaringan strategis LAZNAS PPPA Daarul Qur'an. Lahir dari semangat memberdayakan umat dan memperkuat ekosistem pesantren, SahabatQu Peduli hadir untuk mendekatkan layanan zakat, infaq, sedekah, dan wakaf (ZISWAF) kepada masyarakat - khususnya di wilayah pedesaan, daerah pelosok, dan komunitas berbasis tahfidz.
+                    </p>
+                    <div class="space-y-4">
+                        
+            </div>
+            
+            <!-- Latar Belakang Pembentukan -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Latar Belakang Pembentukan</h3>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="hidden-content show-content">
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Bermula dari pendirian Rumah Tahfidz pertama yang menjadi cikal bakal Pesantren SahabatQu, lembaga ini resmi dikukuhkan sebagai MPZ pada Jumat, 29 Januari 2021 oleh LAZNAS PPPA Daarul Qur'an. Sejak itu, SahabatQu Peduli berperan aktif dalam penghimpunan dan penyaluran dana umat secara profesional dan sesuai syariat, sambil memperkuat program sosial, pendidikan, dakwah, dan pemberdayaan ekonomi masyarakat.
+                        </p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Pengukuhan PPPA Daarul Qur'an sebagai LAZNAS menjadi tonggak lahirnya berbagai MPZ, termasuk dari sektor rumah tahfidz. Rumah tahfidz memiliki kedekatan dengan masyarakat akar rumput dan telah menerima ZIS meski secara informal. Untuk memperluas manfaat dan memastikan legalitas pengelolaan dana umat sesuai ketentuan perundang-undangan, LAZNAS PPPA Daarul Qur'an menginisiasi kolaborasi resmi dengan rumah tahfidz sebagai mitra MPZ.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Pesantren SahabatQu, sebagai pionir Rumah Tahfidz di Indonesia, menyambut ajakan ini dan bergabung menjadi bagian dari jaringan MPZ untuk mengoptimalkan pemanfaatan dana zakat di ekosistem pesantren dan sekitarnya.
+                        </p>
+                    </div>
+                    <button class="toggle-content text-blue-600 font-semibold hover:text-blue-800 flex items-center mt-2">
+                        <span class="show-text">Sembunyikan</span>
+                        <span class="hide-text hidden">Tampilkan Selengkapnya</span>
+                        <i class="fas fa-chevron-down ml-2 show-icon"></i>
+                        <i class="fas fa-chevron-up ml-2 hide-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Visi & Misi -->
+            <div class="mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Visi</h3>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <p class="text-xl text-gray-700 italic">
+                                "Menjadi Lembaga Filantropi Pesantren SahabatQu yang Profesional, Amanah, dan Berbasis Sosial Qur'ani demi Mewujudkan Kemandirian dan Peradaban Berkah."
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Misi</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <p class="text-gray-600">Menghimpun dan mengelola dana zakat, infak, sedekah, wakaf, serta dana sosial lainnya secara profesional, transparan, dan akuntabel</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <p class="text-gray-600">Menjalankan program pemberdayaan masyarakat berkelanjutan berbasis pesantren di bidang pendidikan, dakwah, sosial, dan ekonomi</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <p class="text-gray-600">Mendorong ekosistem pesantren menjadi pusat kemandirian dalam ekonomi, pangan, pendidikan, dan teknologi berbasis nilai Qur'ani</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <p class="text-gray-600">Meningkatkan literasi zakat dan partisipasi publik melalui edukasi, dakwah, dan advokasi gerakan filantropi Islam</p>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <p class="text-gray-600">Menjadi penghubung kebaikan antara donatur dan penerima manfaat secara tepat sasaran, terutama di wilayah marginal dan pelosok</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Program -->
+    <section id="program" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Program Kami</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Berbagai program yang kami lakukan untuk membantu masyarakat
+                </p>
+            </div>
+            
+            <!-- Filter Program -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-5 py-2 rounded-full border border-blue-600 text-blue-600 hover:bg-blue-700 hover:text-white transition" data-filter="all">Semua Program</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="pendidikan">Pendidikan</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="kesehatan">Kesehatan</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="bantuan">Bantuan Bencana</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="ekonomi">Ekonomi</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="dakwah">Dakwah</button>
+            </div>
+            
+            <!-- Program Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Program 1 -->
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" data-category="pendidikan">
+                    <img src="Beasiswa sahabatqu Peduli" alt="Pendidikan" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Beasiswa SahabatQu Peduli</h3>
+                        <p class="text-gray-600 mb-4">
+                            Program Beasiswa Sahabatqu Peduli adalah bentuk nyata kepedulian kami terhadap masa depan para santri..
+                        </p>
+                        <a href="#program-detail" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Program 2 -->
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" data-category="dakwah">
+                    <img src="rumah tahfidz gk.jpg" alt="Dakwah" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Rumah Tahfidz Binaan Gunung Kidul</h3>
+                        <p class="text-gray-600 mb-4">
+                            Program ini merupakan bentuk kepedulian Sahabatqu Peduli dalam mendukung dakwah Al-Qur'an di wilayah pedesaan, khususnya di Gunung Kidul.
+                        </p>
+                        <a href="#program-detail" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Program 3 -->
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" data-category="bantuan">
+                    <img src="Penyaluran Cianjur 8.jpeg" alt="Bantuan Bencana" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Bantuan Bencana</h3>
+                        <p class="text-gray-600 mb-4">
+                            Tanggap darurat dan rehabilitasi pasca bencana alam di seluruh Indonesia.
+                        </p>
+                        <a href="#program-detail" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!--Program 4 -->
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" data-category="pendidikan">
+                    <img src="pembinaan TPA.jpg" alt="Pendidikan" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Pembinaan TPA</h3>
+                        <p class="text-gray-600 mb-4">
+                            Melalui Program Pembinaan TPA, Sahabatqu Peduli mendukung keberlangsungan pendidikan Al-Qur'an di tingkat dasar dengan memberikan bantuan dana untuk para pengajar TPA (Taman Pendidikan Al-Qur'an).
+                        </p>
+                        <a href="#program-detail" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!--Program 5 -->
+                <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" data-category="bantuan">
+                    <img src="palestina.jpg" alt="Bantuan Bencana" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Penyaluran Donasi Palestina</h3>
+                        <p class="text-gray-600 mb-4">
+                            Sahabatqu Peduli membuka kesempatan bagi masyarakat Indonesia untuk menyalurkan kepedulian kepada saudara-saudara kita di Palestina yang tengah mengalami krisis kemanusiaan.
+                        </p>
+                        <a href="#program-detail" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+             
+            <div class="text-center mt-12">
+                <a href="#program-detail" class="donation-button bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700">
+                    Lihat Semua Program
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Berita -->
+    <section id="berita" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Berita Terbaru</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Update terbaru tentang kegiatan dan program SahabatQu Peduli
+                </p>
+            </div>
+            
+            <!-- Filter Berita -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-5 py-2 rounded-full border border-blue-600 text-blue-600 hover:bg-blue-700 hover:text-white transition" data-filter="all">Semua Berita</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="program">Program</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="kegiatan">Kegiatan</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="donasi">Donasi</button>
+                <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 text-gray-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition" data-filter="bencana">Bencana</button>
+            </div>
+            
+           
+    <!-- Donasi Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Donasi Sekarang</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Dukung program-program kami dengan berbagai metode donasi yang tersedia
+                </p>
+            </div>
+            
+            <!-- Donasi Options -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Rekening Bank -->
+                <div class="donation-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-university text-2xl text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Transfer Bank</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            Transfer donasi melalui rekening bank yang telah disediakan
+                        </p>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="bank-info bg-blue-50 p-4 rounded-lg">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-university text-blue-600 mr-2"></i>
+                                    <span class="font-semibold">BCA Syariah</span>
+                                </div>
+                                <p class="text-gray-700">0467070710</p>
+                                <p class="text-gray-700">a/n Yayasan Rumah Tahfidz Indonesia</p>
+                            </div>
+                            
+                      
+                </div>
+                
+                <!-- E-Wallet -->
+                <div class="donation-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-mobile-alt text-2xl text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">E-Wallet</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            Donasi melalui aplikasi e-wallet yang populer
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            
+                            <div class="donation-option border-2 border-gray-300 rounded-lg p-4 text-center">
+                                <img src="QRIS BCAS.jpg" alt="QR Code" class="w-12 h-12 mx-auto mb-2">
+                                <p class="font-semibold">QRIS</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="block text-blue-600 font-semibold hover:text-blue-800 text-center">
+                            Cara Donasi via E-Wallet
+                        </a>
+                    </div>
+                </div>
+                
+              
+                        <!-- Donasi Program Spesifik -->
+                        <div class="donation-option border-2 border-gray-300 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bullseye text-3xl text-blue-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Donasi Program</h4>
+                            <p class="text-gray-600 mb-4">
+                                Pilih program yang ingin Anda dukung
+                            </p>
+                            <div class="mb-4">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                    <option>Beasiswa SahabatQu Peduli</option>
+                                    <option>Rumah Tahfidz Binaan</option>
+                                    <option>Bantuan Bencana</option>
+                                    <option>Pembinaan TPA</option>
+                                    <option>Penyaluran Donasi Palestina</option>
+                                </select>
+                            </div>
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold text-lg hover:bg-blue-700 transition w-full">
+                                Donasi Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Impact Section -->
+            <div class="bg-blue-50 rounded-xl p-8 shadow-md mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Dampak Donasi Anda</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <i class="fas fa-graduation-cap text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Pendidikan</h4>
+                        <p class="text-gray-600">
+                            Rp 1.000.000 dapat mendukung pendidikan 10 anak selama 1 semester
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <i class="fas fa-home text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Rumah Ibadah</h4>
+                        <p class="text-gray-600">
+                            Rp 5.000.000 dapat membangun 1 rumah ibadah untuk komunitas
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <i class="fas fa-utensils text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Makanan</h4>
+                        <p class="text-gray-600">
+                            Rp 50.000 dapat menyediakan makanan untuk 10 keluarga miskin
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                            <i class="fas fa-hand-holding-medical text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800 mb-2">Kesehatan</h4>
+                        <p class="text-gray-600">
+                            Rp 2.000.000 dapat mendukung pengobatan untuk 5 pasien
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hands-helping text-3xl text-blue-400 mr-2"></i>
+                        <span class="text-2xl font-bold">SahabatQu Peduli</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Bersama menebarkan kebermanfaatan bagi sesama
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#beranda" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+                        <li><a href="#tentang" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+                        <li><a href="#program" class="text-gray-400 hover:text-white transition">Program</a></li>
+                        <li><a href="#berita" class="text-gray-400 hover:text-white transition">Berita</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Kontak</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Area Sawah, Padasan, Pakembinangun, Kec. Pakem, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55582</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+62 813 9039 1010</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">sahabatqu@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Rekening Donasi</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-university text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">BCA Syariah</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-hashtag text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">0467070710</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">a/n Yayasan Rumah Tahfidz Indonesia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 SahabatQu Peduli. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Donation Modal -->
+    <div id="donation-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Donasi Sekarang</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-gray-600 mb-4">
+                    Pilih jumlah donasi yang ingin Anda berikan untuk membantu masyarakat yang membutuhkan.
+                </p>
+                
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 5.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 15.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 25.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 50.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 100.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 250.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 500.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Rp 1.000.000</button>
+                    <button class="donation-amount border-2 border-gray-300 rounded-lg py-2 text-center hover:border-blue-600 hover:bg-blue-50 transition">Lainnya</button>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Jumlah Donasi</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-3 text-gray-500">Rp</span>
+                        <input type="text" id="donation-amount-input" class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Metode Pembayaran</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button class="payment-method border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-600 hover:bg-blue-50 transition">
+                            <i class="fas fa-university text-xl mb-1"></i>
+                            <p class="text-sm">Transfer Bank</p>
+                        </button>
+                        <button class="payment-method border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-600 hover:bg-blue-50 transition">
+                            <i class="fas fa-mobile-alt text-xl mb-1"></i>
+                            <p class="text-sm">E-Wallet</p>
+                        </button>
+                        <button class="payment-method border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-600 hover:bg-blue-50 transition">
+                            <i class="fas fa-credit-card text-xl mb-1"></i>
+                            <p class="text-sm">Kartu Kredit</p>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Informasi Donatur</label>
+                    <input type="text" placeholder="Nama Lengkap" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                    <input type="email" placeholder="Email" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                    <input type="tel" placeholder="No Telepon" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                </div>
+            </div>
+            
+            <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                Proses Donasi
+            </button>
+        </div>
+    </div>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Donation Modal
+        const donateButtons = document.querySelectorAll('#donate-btn, #mobile-donate-btn, #donate-btn-beranda');
+        const donationModal = document.getElementById('donation-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        donateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                donationModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModal.addEventListener('click', () => {
+            donationModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        donationModal.addEventListener('click', (e) => {
+            if (e.target === donationModal) {
+                donationModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Donation Amount Selection
+        const donationAmounts = document.querySelectorAll('.donation-amount');
+        const donationInput = document.getElementById('donation-amount-input');
+        
+        donationAmounts.forEach(amount => {
+            amount.addEventListener('click', () => {
+                // Remove active class from all buttons
+                donationAmounts.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('border-gray-300');
+                });
+                
+                // Add active class to clicked button
+                amount.classList.add('bg-blue-600', 'text-white');
+                amount.classList.remove('border-gray-300');
+                
+                // Set input value
+                donationInput.value = amount.textContent.replace(/[^\d]/g, '');
+            });
+        });
+        
+        // Payment Method Selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                // Remove active class from all buttons
+                paymentMethods.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('border-gray-300');
+                });
+                
+                // Add active class to clicked button
+                method.classList.add('bg-blue-600', 'text-white');
+                method.classList.remove('border-gray-300');
+            });
+        });
+        
+        // Toggle content visibility
+        const toggleButtons = document.querySelectorAll('.toggle-content');
+        
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.previousElementSibling;
+                const showText = button.querySelector('.show-text');
+                const hideText = button.querySelector('.hide-text');
+                const showIcon = button.querySelector('.show-icon');
+                const hideIcon = button.querySelector('.hide-icon');
+                
+                content.classList.toggle('show-content');
+                showText.classList.toggle('hidden');
+                hideText.classList.toggle('hidden');
+                showIcon.classList.toggle('hidden');
+                hideIcon.classList.toggle('hidden');
+            });
+        });
+        
+        // Filter Program
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const programCards = document.querySelectorAll('.program-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Show/hide program cards based on filter
+                programCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Filter Berita
+        const beritaFilterButtons = document.querySelectorAll('#berita .filter-btn');
+        const newsCards = document.querySelectorAll('#berita .news-card');
+        
+        beritaFilterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                beritaFilterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Show/hide news cards based on filter
+                newsCards.forEach(card => {
+                    if (filter === 'all' || card.querySelector('.text-blue-600').textContent.toLowerCase() === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
